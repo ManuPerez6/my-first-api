@@ -1,2 +1,3 @@
-console.log("Hello, World!");
-console.log("This is a test.");
+console.log('hola 1');
+console.log('hola 2');
+console.log('hola 3');
