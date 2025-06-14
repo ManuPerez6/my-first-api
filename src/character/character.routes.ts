@@ -8,7 +8,8 @@ characterRouter.get('/', characterController.findAllCharacters);
 characterRouter.get('/:id', characterController.findCharacterById);
 characterRouter.post('/', sanitizeCharacterInput, characterController.addCharacter);
 characterRouter.put('/:id', sanitizeCharacterInput, characterController.updateCharacter);
-characterRouter.delete('/:id', characterController.deleteCharacter);  
+characterRouter.patch('/:id', sanitizeCharacterInput, characterController.partialUpdateCharacter);
+characterRouter.delete('/:id', characterController.deleteCharacter);
 
 function sanitizeCharacterInput(req:any, res:any, next:any) {
 

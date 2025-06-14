@@ -1,6 +1,6 @@
 services:
   mongodb:
-    image: mongo:6.0
+    image: mongo:4.4.29
     container_name: mongodb
     ports:
       - "27017:27017"
@@ -18,11 +18,11 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - /home/manu/Escritorio/Facultad/Desarrollo de Software/characters-api/src/character/migrations/script.sql:/docker-entrypoint-initdb.d/script.sql
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=characters
-
 volumes:
   mongodb_data:
     driver: local

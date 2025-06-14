@@ -46,15 +46,69 @@ export class CharacterController {
 
     }
 
-    updateCharacter(req: Request, res: Response) {
-        // Logic to update an existing character
+    async updateCharacter(req: Request, res: Response): Promise<void> {
+        try {
+            const id = req.params.id;
+            const characterData = req.body.sanitizedInput;
+
+            if (!characterData) {
+                res.status(400).json({ error: 'Invalid input' });
+                return;
+            }
+
+            const updated = await characterRepository.update(id, characterData);
+
+            if (!updated) {
+                res.status(404).json({ error: 'Character not found or update failed' });
+                return;
+            }
+
+            res.status(200).json(updated);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Server error' });
+        }
     }
 
-    deleteCharacter(req: Request, res: Response) {
-        // Logic to delete a character
+    async partialUpdateCharacter(req: Request, res: Response): Promise<void> {
+      try {
+        const id = req.params.id;
+        const updates = req.body.sanitizedInput;
+
+        if (!updates || Object.keys(updates).length === 0) {
+          res.status(400).json({ error: 'No update data provided' });
+          return;
+        }
+
+        const updated = await characterRepository.partialUpdate(id, updates);
+
+        if (!updated) {
+          res.status(404).json({ error: 'Character not found or update failed' });
+          return;
+        }
+
+        res.status(200).json(updated);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+      }
     }
 
+    async deleteCharacter(req: Request, res: Response): Promise<void> {
+        try {
+            const id = req.params.id;
 
+            const deleted = await characterRepository.delete(id);
 
+            if (!deleted) {
+                res.status(404).json({ error: 'Character not found' });
+                return;
+            }
 
+            res.status(200).json({ message: 'Character deleted successfully' });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Server error' });
+        }
+    }
 }

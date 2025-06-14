@@ -3,7 +3,7 @@ GET http://localhost:3000/api/characters
 
 
 ### obtener un character
-GET http://localhost:3000/api/characters/684c8bd02ae4e5f0333939af
+GET http://localhost:3000/api/characters/1
 
 ### crear un nuevo character
 POST http://localhost:3000/api/characters
@@ -20,10 +20,11 @@ Content-Type: application/json
 }
 
 ### modificar un character (PUT - recurso completo e idempotente)
-PUT http://localhost:3000/api/characters/684b9907d79c41bdd6f62e03
+PUT http://localhost:3000/api/characters/1
 Content-Type: application/json
 
 {
+  "id": 1,
   "name": "Anakin Skywalker",
   "characterClass": "Fallen Jedi",
   "items": ["Lightsaber", "Death Star"],
@@ -34,7 +35,7 @@ Content-Type: application/json
 }
 
 ### modificar un character (PATCH - recurso parcial)
-PATCH http://localhost:3000/api/characters/684b9907d79c41bdd6f62e03
+PATCH http://localhost:3000/api/characters/1
 Content-Type: application/json
 
 {
@@ -45,4 +46,4 @@ Content-Type: application/json
 }
 
 ### borrar un character
-DELETE http://localhost:3000/api/characters/684b9907d79c41bdd6f62e03
+DELETE http://localhost:3000/api/characters/2
